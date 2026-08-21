@@ -1,0 +1,87 @@
+# Stack en tiempo real (TimescaleDB 5433, Grafana 3001).
+# Simula el stream de sensores y escribe predicciones de derroche cada minuto.
+# Para el stack historico usa docker-compose.yml.
+
+services:
+  timescaledb_live:
+    image: timescale/timescaledb:latest-pg15
+    container_name: timescaledb_live
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?falta POSTGRES_PASSWORD, copia .env.example a .env}
+      POSTGRES_DB: ${POSTGRES_DB:-postgres}
+    ports:
+      - "${POSTGRES_LIVE_PORT:-5433}:5432"
+    volumes:
+      - ./init-scripts:/docker-entrypoint-initdb.d/
+      - timescaledb-live-data:/var/lib/postgresql/data
+    networks:
+      - live-network
+
+  grafana_live:
+    image: grafana/grafana:latest
+    container_name: grafana_live
+    ports:
+      - "${GRAFANA_LIVE_PORT:-3001}:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+      PG_PASSWORD: ${POSTGRES_PASSWORD:?falta POSTGRES_PASSWORD}
+    volumes:
+      - grafana-live-storage:/var/lib/grafana
+      - ./grafana-live/provisioning:/etc/grafana/provisioning
+      - ./grafana-live/dashboards:/var/lib/grafana/dashboards:ro
+    networks:
+      - live-network
+    depends_on:
+      - timescaledb_live
+
+  simulate-ltss:
+    profiles:
+      - simulate
+    image: python:3.12-slim
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ../scripts:/app/scripts
+    command: >
+      bash -c "pip install -q --disable-pip-version-check psycopg2-binary
+      && python scripts/datos_simulados.py --host timescaledb_live --port 5432"
+    environment:
+      PGUSER: ${POSTGRES_USER:-postgres}
+      PGPASSWORD: ${POSTGRES_PASSWORD:?falta POSTGRES_PASSWORD}
+      PGDATABASE: ${POSTGRES_DB:-postgres}
+    networks:
+      - live-network
+    depends_on:
+      - timescaledb_live
+
+  predict-derroche:
+    profiles:
+      - simulate
+    image: python:3.12-slim
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ../scripts:/app/scripts
+      - ../app:/app/app
+      - ../models:/app/models
+    command: >
+      bash -c "pip install -q --disable-pip-version-check psycopg2-binary joblib numpy scikit-learn pandas
+      && pip install -q --disable-pip-version-check torch --index-url https://download.pytorch.org/whl/cpu
+      && python scripts/predict_derroche.py --host timescaledb_live --port 5432 --interval 60"
+    environment:
+      PGUSER: ${POSTGRES_USER:-postgres}
+      PGPASSWORD: ${POSTGRES_PASSWORD:?falta POSTGRES_PASSWORD}
+      PGDATABASE: ${POSTGRES_DB:-postgres}
+    networks:
+      - live-network
+    depends_on:
+      - timescaledb_live
+
+networks:
+  live-network:
+    driver: bridge
+
+volumes:
+  timescaledb-live-data:
+  grafana-live-storage:

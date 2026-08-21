@@ -1,0 +1,430 @@
+{
+  "uid": "eficiencia-energetica",
+  "title": "Eficiencia Energetica - Hoy en Directo",
+  "tags": ["domotica", "eficiencia"],
+  "timezone": "browser",
+  "refresh": "5s",
+  "time": { "from": "now/d", "to": "now" },
+  "editable": true,
+  "panels": [
+    {
+      "id": 1,
+      "type": "gauge",
+      "title": "T. Aula 1",
+      "gridPos": { "x": 0, "y": 0, "w": 4, "h": 7 },
+      "datasource": { "type": "grafana-postgresql-datasource", "uid": "timescaledb-ds" },
+      "targets": [{
+        "rawSql": "SELECT \"time\", state_numeric AS \"value\" FROM silver_sensores WHERE entity_id = 'sensor.sensor_temperatura_1_temperature' AND state_numeric IS NOT NULL AND $__timeFilter(\"time\") ORDER BY \"time\"",
+        "format": "time_series",
+        "refId": "A",
+        "editorMode": "code"
+      }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "celsius",
+          "min": 15, "max": 35,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "blue",   "value": null },
+              { "color": "green",  "value": 18 },
+              { "color": "yellow", "value": 24 },
+              { "color": "red",    "value": 28 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "orientation": "auto", "showThresholdLabels": false, "showThresholdMarkers": true }
+    },
+    {
+      "id": 2,
+      "type": "gauge",
+      "title": "T. Aula 2",
+      "gridPos": { "x": 4, "y": 0, "w": 4, "h": 7 },
+      "datasource": { "type": "grafana-postgresql-datasource", "uid": "timescaledb-ds" },
+      "targets": [{
+        "rawSql": "SELECT \"time\", state_numeric AS \"value\" FROM silver_sensores WHERE entity_id = 'sensor.sensor_temperatura_2_temperature' AND state_numeric IS NOT NULL AND $__timeFilter(\"time\") ORDER BY \"time\"",
+        "format": "time_series",
+        "refId": "A",
+        "editorMode": "code"
+      }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "celsius",
+          "min": 15, "max": 35,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "blue",   "value": null },
+              { "color": "green",  "value": 18 },
+              { "color": "yellow", "value": 24 },
+              { "color": "red",    "value": 28 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "orientation": "auto", "showThresholdLabels": false, "showThresholdMarkers": true }
+    },
+    {
+      "id": 3,
+      "type": "gauge",
+      "title": "T. Aula 3",
+      "gridPos": { "x": 8, "y": 0, "w": 4, "h": 7 },
+      "datasource": { "type": "grafana-postgresql-datasource", "uid": "timescaledb-ds" },
+      "targets": [{
+        "rawSql": "SELECT \"time\", state_numeric AS \"value\" FROM silver_sensores WHERE entity_id = 'sensor.sensor_temperatura_3_temperature' AND state_numeric IS NOT NULL AND $__timeFilter(\"time\") ORDER BY \"time\"",
+        "format": "time_series",
+        "refId": "A",
+        "editorMode": "code"
+      }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "celsius",
+          "min": 15, "max": 35,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "blue",   "value": null },
+              { "color": "green",  "value": 18 },
+              { "color": "yellow", "value": 24 },
+              { "color": "red",    "value": 28 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "orientation": "auto", "showThresholdLabels": false, "showThresholdMarkers": true }
+    },
+    {
+      "id": 4,
+      "type": "gauge",
+      "title": "T. Aula 4",
+      "gridPos": { "x": 12, "y": 0, "w": 4, "h": 7 },
+      "datasource": { "type": "grafana-postgresql-datasource", "uid": "timescaledb-ds" },
+      "targets": [{
+        "rawSql": "SELECT \"time\", state_numeric AS \"value\" FROM silver_sensores WHERE entity_id = 'sensor.sensor_temperatura_4_temperature' AND state_numeric IS NOT NULL AND $__timeFilter(\"time\") ORDER BY \"time\"",
+        "format": "time_series",
+        "refId": "A",
+        "editorMode": "code"
+      }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "celsius",
+          "min": 15, "max": 35,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "blue",   "value": null },
+              { "color": "green",  "value": 18 },
+              { "color": "yellow", "value": 24 },
+              { "color": "red",    "value": 28 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "orientation": "auto", "showThresholdLabels": false, "showThresholdMarkers": true }
+    },
+    {
+      "id": 5,
+      "type": "gauge",
+      "title": "T. Exterior",
+      "gridPos": { "x": 16, "y": 0, "w": 4, "h": 7 },
+      "datasource": { "type": "grafana-postgresql-datasource", "uid": "timescaledb-ds" },
+      "targets": [{
+        "rawSql": "SELECT \"time\", state_numeric AS \"value\" FROM silver_sensores WHERE entity_id = 'sensor.mislata_temperatura' AND state_numeric IS NOT NULL AND $__timeFilter(\"time\") ORDER BY \"time\"",
+        "format": "time_series",
+        "refId": "A",
+        "editorMode": "code"
+      }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "celsius",
+          "min": -5, "max": 42,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "blue",   "value": null },
+              { "color": "green",  "value": 10 },
+              { "color": "orange", "value": 30 },
+              { "color": "red",    "value": 36 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "orientation": "auto", "showThresholdLabels": false, "showThresholdMarkers": true }
+    },
+    {
+      "id": 6,
+      "type": "gauge",
+      "title": "Humedad Ext.",
+      "gridPos": { "x": 20, "y": 0, "w": 4, "h": 7 },
+      "datasource": { "type": "grafana-postgresql-datasource", "uid": "timescaledb-ds" },
+      "targets": [{
+        "rawSql": "SELECT \"time\", state_numeric AS \"value\" FROM silver_sensores WHERE entity_id = 'sensor.mislata_humedad' AND state_numeric IS NOT NULL AND $__timeFilter(\"time\") ORDER BY \"time\"",
+        "format": "time_series",
+        "refId": "A",
+        "editorMode": "code"
+      }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0, "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "yellow", "value": null },
+              { "color": "green",  "value": 30 },
+              { "color": "blue",   "value": 70 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "orientation": "auto", "showThresholdLabels": false, "showThresholdMarkers": true }
+    },
+
+    {
+      "id": 10,
+      "type": "timeseries",
+      "title": "Temperatura Interior vs Exterior",
+      "gridPos": { "x": 0, "y": 7, "w": 24, "h": 10 },
+      "datasource": { "type": "grafana-postgresql-datasource", "uid": "timescaledb-ds" },
+      "targets": [{
+        "rawSql": "SELECT \"time\" AS \"time\", CASE entity_id WHEN 'sensor.sensor_temperatura_1_temperature' THEN 'Aula 1' WHEN 'sensor.sensor_temperatura_2_temperature' THEN 'Aula 2' WHEN 'sensor.sensor_temperatura_3_temperature' THEN 'Aula 3' WHEN 'sensor.sensor_temperatura_4_temperature' THEN 'Aula 4' WHEN 'sensor.mislata_temperatura' THEN 'Exterior' END AS metric, state_numeric AS value FROM silver_sensores WHERE entity_id IN ('sensor.sensor_temperatura_1_temperature','sensor.sensor_temperatura_2_temperature','sensor.sensor_temperatura_3_temperature','sensor.sensor_temperatura_4_temperature','sensor.mislata_temperatura') AND state_numeric IS NOT NULL AND $__timeFilter(\"time\") ORDER BY \"time\"",
+        "format": "time_series",
+        "refId": "A",
+        "editorMode": "code"
+      }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "celsius",
+          "custom": {
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "spanNulls": true,
+            "pointSize": 3,
+            "showPoints": "never"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Exterior" },
+            "properties": [
+              { "id": "custom.fillOpacity", "value": 15 },
+              { "id": "custom.lineStyle", "value": { "fill": "dash", "dash": [10, 4] } },
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "light-blue" } }
+            ]
+          }
+        ]
+      },
+      "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "multi", "sort": "desc" } }
+    },
+
+    {
+      "id": 20,
+      "type": "timeseries",
+      "title": "Humedad Interior + Exterior",
+      "gridPos": { "x": 0, "y": 17, "w": 12, "h": 9 },
+      "datasource": { "type": "grafana-postgresql-datasource", "uid": "timescaledb-ds" },
+      "targets": [{
+        "rawSql": "SELECT \"time\" AS \"time\", CASE entity_id WHEN 'sensor.sensor_temperatura_1_humidity' THEN 'Hum Aula 1' WHEN 'sensor.sensor_temperatura_2_humidity' THEN 'Hum Aula 2' WHEN 'sensor.sensor_temperatura_3_humidity' THEN 'Hum Aula 3' WHEN 'sensor.sensor_temperatura_4_humidity' THEN 'Hum Aula 4' WHEN 'sensor.mislata_humedad' THEN 'Hum Exterior' END AS metric, state_numeric AS value FROM silver_sensores WHERE entity_id IN ('sensor.sensor_temperatura_1_humidity','sensor.sensor_temperatura_2_humidity','sensor.sensor_temperatura_3_humidity','sensor.sensor_temperatura_4_humidity','sensor.mislata_humedad') AND state_numeric IS NOT NULL AND $__timeFilter(\"time\") ORDER BY \"time\"",
+        "format": "time_series",
+        "refId": "A",
+        "editorMode": "code"
+      }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "custom": { "lineWidth": 2, "fillOpacity": 0, "spanNulls": true, "showPoints": "never" }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Hum Exterior" },
+            "properties": [
+              { "id": "custom.fillOpacity", "value": 10 },
+              { "id": "custom.lineStyle", "value": { "fill": "dash", "dash": [10, 4] } }
+            ]
+          }
+        ]
+      },
+      "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "multi" } }
+    },
+    {
+      "id": 21,
+      "type": "timeseries",
+      "title": "Viento y Nubosidad",
+      "gridPos": { "x": 12, "y": 17, "w": 12, "h": 9 },
+      "datasource": { "type": "grafana-postgresql-datasource", "uid": "timescaledb-ds" },
+      "targets": [
+        {
+          "rawSql": "SELECT \"time\" AS \"time\", state_numeric AS \"Viento (km/h)\" FROM silver_sensores WHERE entity_id = 'sensor.mislata_viento' AND state_numeric IS NOT NULL AND $__timeFilter(\"time\") ORDER BY \"time\"",
+          "format": "time_series",
+          "refId": "A",
+          "editorMode": "code"
+        },
+        {
+          "rawSql": "SELECT \"time\" AS \"time\", state_numeric AS \"Nubosidad\" FROM silver_sensores WHERE entity_id = 'sensor.mislata_nubosidad' AND state_numeric IS NOT NULL AND $__timeFilter(\"time\") ORDER BY \"time\"",
+          "format": "time_series",
+          "refId": "B",
+          "editorMode": "code"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "custom": { "lineWidth": 2, "fillOpacity": 0, "spanNulls": true, "showPoints": "never" }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Viento (km/h)" },
+            "properties": [
+              { "id": "unit", "value": "velocitykmh" },
+              { "id": "custom.axisPlacement", "value": "left" },
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "light-blue" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Nubosidad" },
+            "properties": [
+              { "id": "custom.axisPlacement", "value": "right" },
+              { "id": "custom.fillOpacity", "value": 15 },
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "light-purple" } }
+            ]
+          }
+        ]
+      },
+      "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "multi" } }
+    },
+
+    {
+      "id": 30,
+      "type": "state-timeline",
+      "title": "Estado Puertas y Ventanas",
+      "gridPos": { "x": 0, "y": 26, "w": 24, "h": 8 },
+      "datasource": { "type": "grafana-postgresql-datasource", "uid": "timescaledb-ds" },
+      "targets": [{
+        "rawSql": "SELECT \"time\" AS \"time\", REPLACE(REPLACE(entity_id, 'binary_sensor.sensor_', ''), '_contact', '') AS metric, state_numeric AS value FROM silver_sensores WHERE entity_id LIKE 'binary_sensor.%' AND state_numeric IS NOT NULL AND $__timeFilter(\"time\") ORDER BY \"time\"",
+        "format": "time_series",
+        "refId": "A",
+        "editorMode": "code"
+      }],
+      "fieldConfig": {
+        "defaults": {
+          "custom": { "fillOpacity": 80 },
+          "mappings": [
+            { "type": "value", "options": { "0": { "text": "Cerrada", "color": "green" }, "1": { "text": "Abierta", "color": "red" } } }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "red",   "value": 0.5 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": { "showValue": "auto", "mergeValues": true, "alignValue": "left", "legend": { "displayMode": "list", "placement": "bottom" } }
+    },
+
+    {
+      "id": 40,
+      "type": "stat",
+      "title": "Alerta Derroche (Hora actual)",
+      "gridPos": { "x": 0, "y": 34, "w": 6, "h": 10 },
+      "datasource": { "type": "grafana-postgresql-datasource", "uid": "timescaledb-ds" },
+      "targets": [{
+        "rawSql": "SELECT hora AS \"time\", probabilidad * 100 AS \"Prob. Derroche (%)\" FROM predicciones_derroche WHERE hora >= date_trunc('day', now()) ORDER BY hora DESC LIMIT 1",
+        "format": "time_series",
+        "refId": "A",
+        "editorMode": "code"
+      }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0, "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green",  "value": null },
+              { "color": "yellow", "value": 40 },
+              { "color": "red",    "value": 60 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value_and_name",
+        "orientation": "auto"
+      }
+    },
+    {
+      "id": 41,
+      "type": "table",
+      "title": "Condiciones por Hora (Hoy)",
+      "gridPos": { "x": 6, "y": 34, "w": 9, "h": 10 },
+      "datasource": { "type": "grafana-postgresql-datasource", "uid": "timescaledb-ds" },
+      "targets": [{
+        "rawSql": "SELECT fecha_hora_utc AS \"Hora\", ROUND(temp_aula::numeric, 1) AS \"T.Aula\", ROUND(hum_aula::numeric, 1) AS \"Hum.Aula\", ROUND(temp_exterior::numeric, 1) AS \"T.Ext\", ROUND(COALESCE(nubosidad, 0)::numeric, 0) AS \"Nubes\", ROUND(COALESCE(vel_viento, 0)::numeric, 1) AS \"Viento\" FROM gold_features_horaria WHERE fecha_hora_utc >= date_trunc('day', now()) ORDER BY fecha_hora_utc DESC",
+        "format": "table",
+        "refId": "A",
+        "editorMode": "code"
+      }],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Hora" },
+            "properties": [{ "id": "unit", "value": "dateTimeAsLocalHM" }]
+          }
+        ]
+      },
+      "options": { "showHeader": true, "footer": { "show": false } }
+    },
+    {
+      "id": 42,
+      "type": "barchart",
+      "title": "Derroche por Hora (Hoy)",
+      "gridPos": { "x": 15, "y": 34, "w": 9, "h": 10 },
+      "datasource": { "type": "grafana-postgresql-datasource", "uid": "timescaledb-ds" },
+      "targets": [{
+        "rawSql": "SELECT hora AS \"time\", probabilidad * 100 AS \"Prob. Derroche (%)\" FROM predicciones_derroche WHERE hora >= date_trunc('day', now()) ORDER BY hora",
+        "format": "time_series",
+        "refId": "A",
+        "editorMode": "code"
+      }],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0, "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green",  "value": null },
+              { "color": "yellow", "value": 40 },
+              { "color": "red",    "value": 60 }
+            ]
+          },
+          "custom": { "thresholdsStyle": { "mode": "line" } }
+        },
+        "overrides": []
+      },
+      "options": {
+        "orientation": "vertical",
+        "barWidth": 0.7,
+        "showValue": "always",
+        "legend": { "displayMode": "hidden" },
+        "tooltip": { "mode": "single" }
+      }
+    }
+  ],
+  "schemaVersion": 39,
+  "version": 1
+}

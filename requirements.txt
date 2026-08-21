@@ -1,0 +1,21 @@
+# Datos y análisis
+pandas
+numpy
+psycopg2-binary
+
+# Modelado
+scikit-learn
+torch
+joblib
+
+# Visualización
+matplotlib
+seaborn
+plotly
+
+# App
+streamlit
+
+# Notebooks
+jupyterlab
+ipykernel

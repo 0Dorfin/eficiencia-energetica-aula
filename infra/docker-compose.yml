@@ -1,0 +1,44 @@
+# Stack historico (TimescaleDB 5432, Grafana 3000).
+# Carga el volcado completo de `ltss` desde ./init-scripts y sirve el dashboard historico.
+# Para el stack en tiempo real usa docker-compose.live.yml.
+
+services:
+  timescaledb:
+    image: timescale/timescaledb:latest-pg15
+    container_name: bd_eficiencia
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?falta POSTGRES_PASSWORD, copia .env.example a .env}
+      POSTGRES_DB: ${POSTGRES_DB:-postgres}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - ./init-scripts:/docker-entrypoint-initdb.d/
+      - timescaledb-data:/var/lib/postgresql/data
+    networks:
+      - monitoring-network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana_eficiencia
+    ports:
+      - "${GRAFANA_PORT:-3000}:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+      PG_PASSWORD: ${POSTGRES_PASSWORD:?falta POSTGRES_PASSWORD}
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    networks:
+      - monitoring-network
+    depends_on:
+      - timescaledb
+
+networks:
+  monitoring-network:
+    driver: bridge
+
+volumes:
+  timescaledb-data:
+  grafana-storage:

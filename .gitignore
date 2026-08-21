@@ -1,0 +1,22 @@
+# Entornos
+.venv/
+.venv-docx/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+build/
+
+# Secretos
+.env
+
+# Herramientas locales
+.tools/
+.vscode/
+
+# Volcado completo de la tabla ltss (222 MB, supera el limite de GitHub).
+# Ver docs/datos.md para regenerarlo o descargarlo.
+infra/init-scripts/02_datos.sql
