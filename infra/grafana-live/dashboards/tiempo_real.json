@@ -816,7 +816,9 @@
             },
             "thresholdsStyle": {
               "mode": "off"
-            }
+            },
+            "axisSoftMin": 15,
+            "axisSoftMax": 30
           },
           "mappings": [],
           "thresholds": {
@@ -971,7 +973,9 @@
             },
             "thresholdsStyle": {
               "mode": "off"
-            }
+            },
+            "axisSoftMin": 30,
+            "axisSoftMax": 90
           },
           "mappings": [],
           "thresholds": {

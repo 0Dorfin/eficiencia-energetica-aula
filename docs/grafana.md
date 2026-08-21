@@ -62,5 +62,11 @@ prevista para la hora siguiente.
 
 ![Estado de puertas y ventanas y tabla de condiciones por hora](img/21_grafana_live_aperturas.png)
 
+Los paneles de series usan **límites soft** en el eje Y (`axisSoftMin` / `axisSoftMax`):
+15–30 °C en temperatura y 30–90 % en humedad. Fijan un rango estable — sin él, el eje
+automático se ajusta a la banda de los datos y una oscilación de décimas llena el panel,
+haciendo que el ruido parezca señal. Al ser soft y no duros, un valor fuera de rango
+(un sensor averiado) ensancha el eje en lugar de quedar recortado fuera del gráfico.
+
 Requiere el stack en tiempo real con el perfil `simulate` activo — ver
 [tiempo-real.md](tiempo-real.md).
