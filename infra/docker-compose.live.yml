@@ -45,7 +45,7 @@ services:
       - ../scripts:/app/scripts
     command: >
       bash -c "pip install -q --disable-pip-version-check psycopg2-binary
-      && python scripts/datos_simulados.py --host timescaledb_live --port 5432"
+      && python scripts/simular_sensores.py --host timescaledb_live --port 5432"
     environment:
       PGUSER: ${POSTGRES_USER:-postgres}
       PGPASSWORD: ${POSTGRES_PASSWORD:?falta POSTGRES_PASSWORD}
@@ -68,7 +68,7 @@ services:
     command: >
       bash -c "pip install -q --disable-pip-version-check psycopg2-binary joblib numpy scikit-learn pandas
       && pip install -q --disable-pip-version-check torch --index-url https://download.pytorch.org/whl/cpu
-      && python scripts/predict_derroche.py --host timescaledb_live --port 5432 --interval 60"
+      && python scripts/predecir_derroche.py --host timescaledb_live --port 5432 --interval 60"
     environment:
       PGUSER: ${POSTGRES_USER:-postgres}
       PGPASSWORD: ${POSTGRES_PASSWORD:?falta POSTGRES_PASSWORD}

@@ -4,7 +4,7 @@ from datetime import datetime, timedelta, timezone
 
 import psycopg2
 
-from datos_simulados import ENTITIES
+from simular_sensores import ENTITIES
 
 ENTITY_IDS = [e[0] for e in ENTITIES]
 

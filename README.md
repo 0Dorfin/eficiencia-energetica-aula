@@ -74,16 +74,16 @@ proyecto_domotica_3/
 │   └── predictor.py                  # RedDerroche / RedDerrocheV2 + predict()
 │
 ├── scripts/                          # Pipeline en tiempo real y entrenamiento
-│   ├── datos_simulados.py            # Simulador del stream de sensores
-│   ├── predict_derroche.py           # Servicio de inferencia continua
-│   ├── estado_calefaccion.py         # Algoritmo de termostato
-│   ├── train_calefaccion.py          # Reentrena la regresión lineal
-│   └── relleno_datos.py              # Relleno de huecos en ltss
+│   ├── simular_sensores.py           # Simulador del stream de sensores
+│   ├── predecir_derroche.py          # Servicio de inferencia continua
+│   ├── estado_calefaccion.py         # Algoritmo de termostato (módulo compartido)
+│   ├── entrenar_calefaccion.py       # Reentrena la regresión lineal
+│   └── rellenar_huecos.py            # Relleno de huecos en ltss
 │
 ├── notebooks/                        # Análisis y modelado
 │   ├── 01_eda.ipynb                  # Correlaciones entre sensores
 │   ├── 02_dataset_gold.ipynb         # Construcción del dataset y del target
-│   ├── 03_regresion_calefaccion.ipynb # Modelo lineal de temperatura de calefacción
+│   ├── 03_regresion_calefaccion.ipynb # Modelo lineal de calefacción
 │   ├── 04_red_neuronal_v1.ipynb      # Red neuronal V1 (13 features)
 │   ├── 05_red_neuronal_v2.ipynb      # Red neuronal V2 — modelo final (31 features)
 │   └── 06_evaluacion.ipynb           # Verifica que models/ reproduce las métricas
@@ -166,10 +166,10 @@ cd infra && docker compose -f docker-compose.live.yml logs -f predict-derroche
 cd infra && docker compose -f docker-compose.live.yml --profile simulate down -v
 
 # Una única predicción contra la base en directo
-PGPASSWORD=... python scripts/predict_derroche.py --host localhost --port 5433 --once
+PGPASSWORD=... python scripts/predecir_derroche.py --host localhost --port 5433 --once
 
 # Reentrenar la regresión lineal de calefacción
-python scripts/train_calefaccion.py
+python scripts/entrenar_calefaccion.py
 
 # Abrir los notebooks
 jupyter lab notebooks/

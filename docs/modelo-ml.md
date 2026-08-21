@@ -15,7 +15,7 @@ una red neuronal que predice el derroche de la hora siguiente.
 ## 1. Regresión lineal: temperatura de calefacción
 
 Notebooks `notebooks/02_dataset_gold.ipynb` y `notebooks/03_regresion_calefaccion.ipynb`.
-Entrenamiento reproducible: `scripts/train_calefaccion.py`.
+Entrenamiento reproducible: `scripts/entrenar_calefaccion.py`.
 
 **Objetivo:** inferir la temperatura del sensor de calefacción a partir de las condiciones
 del aula, ya que no se dispone de lectura directa continua.

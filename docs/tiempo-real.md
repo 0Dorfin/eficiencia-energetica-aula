@@ -21,13 +21,13 @@ la red del centro, y sin contaminar el volcado histórico del puerto 5432.
 ## 2. Flujo
 
 ```
-  datos_simulados.py            (cada 5 s)
+  simular_sensores.py            (cada 5 s)
       │  INSERT lecturas sintéticas de los 17 dispositivos
       ▼
   ltss  →  bronze_sensores  →  silver_sensores  →  gold_features_horaria
       │
       ▼
-  predict_derroche.py           (cada 60 s)
+  predecir_derroche.py           (cada 60 s)
       │  lee la ventana de 4 h, construye las 31 features, invoca RedDerrocheV2
       ▼
   predicciones_derroche  ──►  Grafana :3001
@@ -37,23 +37,28 @@ la red del centro, y sin contaminar el volcado histórico del puerto 5432.
 
 | Script | Función |
 |---|---|
-| `scripts/datos_simulados.py` | Genera lecturas sintéticas con deriva realista para los 17 dispositivos y las inserta en `ltss`. Reintenta la conexión hasta 30 veces al arrancar. |
-| `scripts/predict_derroche.py` | Cada `--interval` segundos lee `gold_features_horaria`, deriva features, invoca el modelo y hace `UPSERT` en `predicciones_derroche`. Al arrancar rellena las horas ya pasadas del día (`backfill_today`). |
+| `scripts/simular_sensores.py` | Genera lecturas sintéticas con deriva realista para los 17 dispositivos y las inserta en `ltss`. Reintenta la conexión hasta 30 veces al arrancar. |
+| `scripts/predecir_derroche.py` | Cada `--interval` segundos lee `gold_features_horaria`, deriva features, invoca el modelo y hace `UPSERT` en `predicciones_derroche`. Al arrancar rellena las horas ya pasadas del día (`backfill_today`). |
 | `scripts/estado_calefaccion.py` | Algoritmo de termostato + inferencia de `calefaccion_encendida` a partir de `models/calefaccion_linear.joblib`. Compartido por notebooks y pipeline. |
-| `scripts/train_calefaccion.py` | Reentrena la regresión lineal de calefacción desde `data/silver/dataset_horario.csv`. |
-| `scripts/relleno_datos.py` | Utilidad puntual: rellena huecos temporales de `ltss` copiando el mismo periodo de N años atrás, desplazado. |
+| `scripts/entrenar_calefaccion.py` | Reentrena la regresión lineal de calefacción desde `data/silver/dataset_horario.csv`. |
+| `scripts/rellenar_huecos.py` | Utilidad puntual: rellena huecos temporales de `ltss` copiando el mismo periodo de N años atrás, desplazado. |
 
-Todos aceptan `--host`, `--port`, `--dbname`, `--user`, `--password`, con fallback a las
-variables `PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER`, `PGPASSWORD`.
+Los tres que hablan con la base de datos — `simular_sensores.py`, `predecir_derroche.py` y
+`rellenar_huecos.py` — aceptan `--host`, `--port`, `--dbname`, `--user` y `--password`, con
+fallback a las variables `PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER` y `PGPASSWORD`.
+
+`entrenar_calefaccion.py` no toma argumentos: lee `data/silver/dataset_horario.csv` y escribe
+`models/calefaccion_linear.joblib`. Ejecutarlo reentrena el modelo directamente.
+`estado_calefaccion.py` no es ejecutable, es el módulo que importan los otros.
 
 **Flags útiles:**
 
 ```bash
-python scripts/datos_simulados.py  --once             # una sola inserción
-python scripts/datos_simulados.py  --seed 42          # simulación reproducible
-python scripts/predict_derroche.py --once             # una predicción y salir
-python scripts/predict_derroche.py --no-backfill      # no rellenar horas pasadas
-python scripts/relleno_datos.py    --auto-gap --dry-run
+python scripts/simular_sensores.py  --once             # una sola inserción
+python scripts/simular_sensores.py  --seed 42          # simulación reproducible
+python scripts/predecir_derroche.py --once             # una predicción y salir
+python scripts/predecir_derroche.py --no-backfill      # no rellenar horas pasadas
+python scripts/rellenar_huecos.py    --auto-gap --dry-run
 ```
 
 ## 4. Puesta en marcha
