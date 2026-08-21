@@ -17,7 +17,8 @@ Imágenes referenciadas desde la documentación.
 | `12_curva_precision_recall.png` | Curva Precision-Recall, AP = 0.9005 (línea base 0.268) | `notebooks/06_evaluacion.ipynb` |
 | `13_app_formulario.png` | Formulario de la app Streamlit | App |
 | `14_app_resultado_alerta.png` | Resultado con alerta de derroche (69,2 %) | App |
-| `14_grafana_tiempo_real.png` | Estado actual del aula (gauges, alerta) | Grafana :3001 |
+| `14_grafana_tiempo_real.png` | Estado actual del aula, calefacción apagada | Grafana :3001 |
+| `22_grafana_live_alerta.png` | Estado actual con calefacción encendida y alerta al 89,5 % | Grafana :3001 |
 | `20_grafana_live_ambiente.png` | Temperatura interior/exterior y ambiente | Grafana :3001 |
 | `21_grafana_live_aperturas.png` | Puertas/ventanas y condiciones por hora | Grafana :3001 |
 | `17_grafana_hist_distribucion.png` | Distribución del sensor y temperatura histórica | Grafana :3000 |

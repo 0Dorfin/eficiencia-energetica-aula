@@ -143,21 +143,27 @@ que no pueden desincronizarse entre sí.
 
 ```bash
 cd infra
-docker compose up -d
+docker compose --env-file ../.env up -d
 ```
 
 - Grafana: http://localhost:3000 (`admin` / `GRAFANA_ADMIN_PASSWORD`)
 - TimescaleDB: `localhost:5432`
 
+> `--env-file ../.env` es necesario porque Docker Compose busca el `.env` junto al fichero
+> compose, no en la raíz del repositorio.
+
 > El volcado `infra/init-scripts/02_datos.sql` (222 MB) no está versionado por superar el
 > límite de GitHub. Sin él la tabla `ltss` arranca vacía — ver
 > [docs/datos.md § Regenerar los datos](docs/datos.md#7-regenerar-los-datos).
+
+> Si los puertos 5432/5433/3000/3001 están ocupados, cámbialos en `.env`
+> (`POSTGRES_PORT`, `POSTGRES_LIVE_PORT`, `GRAFANA_PORT`, `GRAFANA_LIVE_PORT`).
 
 **Stack en tiempo real** — simulador de sensores + inferencia continua:
 
 ```bash
 cd infra
-docker compose -f docker-compose.live.yml --profile simulate up -d
+docker compose --env-file ../.env -f docker-compose.live.yml --profile simulate up -d
 ```
 
 - Grafana: http://localhost:3001
@@ -174,10 +180,10 @@ streamlit run app/main.py       # http://localhost:8501
 
 ```bash
 # Logs del predictor en tiempo real
-cd infra && docker compose -f docker-compose.live.yml logs -f predict-derroche
+cd infra && docker compose --env-file ../.env -f docker-compose.live.yml logs -f predict-derroche
 
 # Parar y limpiar volúmenes del stack en directo
-cd infra && docker compose -f docker-compose.live.yml --profile simulate down -v
+cd infra && docker compose --env-file ../.env -f docker-compose.live.yml --profile simulate down -v
 
 # Una única predicción contra la base en directo
 PGPASSWORD=... python scripts/predecir_derroche.py --host localhost --port 5433 --once

@@ -66,7 +66,7 @@ python scripts/rellenar_huecos.py    --auto-gap --dry-run
 ```bash
 cp .env.example .env          # ajusta POSTGRES_PASSWORD
 cd infra
-docker compose -f docker-compose.live.yml --profile simulate up -d
+docker compose --env-file ../.env -f docker-compose.live.yml --profile simulate up -d
 ```
 
 Levanta cuatro contenedores: TimescaleDB (5433), Grafana (3001), el simulador y el predictor.
@@ -76,7 +76,7 @@ El servicio `predict-derroche` instala PyTorch CPU en el primer arranque, así q
 minutos en emitir la primera predicción. Seguimiento:
 
 ```bash
-docker compose -f docker-compose.live.yml logs -f predict-derroche
+docker compose --env-file ../.env -f docker-compose.live.yml logs -f predict-derroche
 ```
 
 ## 5. Tabla de predicciones
