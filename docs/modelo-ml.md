@@ -52,7 +52,7 @@ termostato que decide `calefaccion_encendida`.
 
 ## 2. Red neuronal V1
 
-Notebook: `notebooks/04_red_neuronal_v1.ipynb` — clase `RedDerroche` en `app/predictor.py`.
+Notebook: `notebooks/04_red_neuronal_v1.ipynb` — clase `RedDerroche` en `src/derroche/modelo.py`.
 
 ```
 Input (13 features)
@@ -70,7 +70,7 @@ Input (13 features)
 
 ## 3. Red neuronal V2 (modelo final)
 
-Notebook: `notebooks/05_red_neuronal_v2.ipynb` — clase `RedDerrocheV2` en `app/predictor.py`.
+Notebook: `notebooks/05_red_neuronal_v2.ipynb` — clase `RedDerrocheV2` en `src/derroche/modelo.py`.
 
 | Aspecto | V1 | V2 |
 |---|---|---|

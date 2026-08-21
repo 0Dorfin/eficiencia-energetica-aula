@@ -1,14 +1,11 @@
-import sys
 from pathlib import Path
 
 import streamlit as st
 import plotly.graph_objects as go
 
-_APP_DIR = Path(__file__).resolve().parent
-_ROOT = _APP_DIR.parent
-if str(_APP_DIR) not in sys.path:
-    sys.path.insert(0, str(_APP_DIR))
-from predictor import predict
+from derroche import predict
+
+_ROOT = Path(__file__).resolve().parent.parent
 
 MES_NOMBRES = (
     "Enero",

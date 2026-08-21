@@ -9,11 +9,10 @@ import pandas as pd
 import psycopg2
 
 _ROOT = Path(__file__).resolve().parent.parent
-_SCRIPTS_TR = Path(__file__).resolve().parent
-sys.path.insert(0, str(_SCRIPTS_TR))
-sys.path.insert(0, str(_ROOT / "app"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from estado_calefaccion import compute_calefaccion_encendida_batch
-from predictor import predict
+
+from derroche import predict
 
 MODEL_PATH = _ROOT / "models" / "model_derroche_v2.pt"
 SCALER_PATH = _ROOT / "models" / "scaler_derroche_v2.joblib"

@@ -17,7 +17,7 @@ Interfaz Streamlit para lanzar predicciones manuales de derroche a partir de lec
 | Fichero | Rol |
 |---|---|
 | `app/main.py` | Interfaz: formulario, estilos y visualización |
-| `app/predictor.py` | Inferencia: arquitecturas, construcción de features y `predict()` |
+| `src/derroche/` | Paquete compartido: features, arquitectura e inferencia |
 | `.streamlit/config.toml` | Tema visual |
 
 Artefactos que carga: `models/model_derroche_v2.pt` y `models/scaler_derroche_v2.joblib`.
@@ -48,11 +48,11 @@ Al pulsar *Predecir derroche en la siguiente hora*:
 
 ## 4. Pipeline de inferencia
 
-`app/predictor.py::predict()` ejecuta:
+`derroche.inferencia.predict()` ejecuta:
 
 1. Si `calefaccion_encendida == 0` → devuelve `(0, 0.0)` sin invocar la red
    (ver [modelo-ml.md § Regla de negocio](modelo-ml.md#5-regla-de-negocio))
-2. `_build_v2_features()` deriva las 31 features: codificación cíclica de hora/día/mes,
+2. `derroche.features.build_vector()` deriva las 31 features: codificación cíclica de hora/día/mes,
    lags de 1-3 h, deltas de temperatura e interacciones
 3. Escalado con `scaler_derroche_v2.joblib`
 4. Forward de `RedDerrocheV2` en modo `eval()`

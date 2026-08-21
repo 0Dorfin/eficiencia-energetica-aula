@@ -19,3 +19,6 @@ streamlit
 # Notebooks
 jupyterlab
 ipykernel
+
+# Tests
+pytest

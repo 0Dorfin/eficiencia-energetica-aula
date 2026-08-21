@@ -69,9 +69,18 @@ proyecto_domotica_3/
 ├── requirements.txt
 ├── .env.example                      # Plantilla de credenciales y puertos
 │
+├── src/derroche/                     # Paquete: definición única del modelo
+│   ├── features.py                   # Las 31 features (entrenamiento e inferencia)
+│   ├── modelo.py                     # Arquitecturas RedDerroche y RedDerrocheV2
+│   └── inferencia.py                 # Carga cacheada de artefactos y predict()
+│
+├── tests/                            # Suite de pytest
+│   ├── test_features.py              # Paridad entrenamiento/inferencia
+│   ├── test_artefactos.py            # El .pt carga con la clase de producción
+│   └── test_prediccion.py            # Regla de negocio y métricas documentadas
+│
 ├── app/                              # App de predicción
-│   ├── main.py                       # Interfaz Streamlit
-│   └── predictor.py                  # RedDerroche / RedDerrocheV2 + predict()
+│   └── main.py                       # Interfaz Streamlit
 │
 ├── scripts/                          # Pipeline en tiempo real y entrenamiento
 │   ├── simular_sensores.py           # Simulador del stream de sensores
@@ -123,7 +132,12 @@ proyecto_domotica_3/
 
 ```bash
 cp .env.example .env        # define POSTGRES_PASSWORD antes de continuar
+pip install -e .            # instala el paquete `derroche` en modo editable
 ```
+
+El paquete `src/derroche/` es la definición única de las features, la arquitectura y
+la inferencia. Los notebooks, la app y el servicio en tiempo real lo importan, de modo
+que no pueden desincronizarse entre sí.
 
 **Stack histórico** — base de datos con el volcado completo y dashboard histórico:
 
@@ -173,6 +187,9 @@ python scripts/entrenar_calefaccion.py
 
 # Abrir los notebooks
 jupyter lab notebooks/
+
+# Ejecutar los tests
+pytest
 ```
 
 ## Stack tecnológico
