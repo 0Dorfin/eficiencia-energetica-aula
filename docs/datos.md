@@ -91,7 +91,7 @@ los 4 sin pérdida significativa de información.
 
 Notebook: `notebooks/02_build_gold.ipynb`
 
-### Tarea 3 — Recopilación y agregación horaria
+### 5.1 Agregación horaria y enriquecimiento
 
 Lee `gold_features_horaria` desde PostgreSQL y enriquece con:
 
@@ -99,21 +99,21 @@ Lee `gold_features_horaria` desde PostgreSQL y enriquece con:
 - Datos de calefacción: join con `data/bronze/historico_calefaccion.csv`
 - Imputación de nulos
 
-**Resultado:** `data/silver/dataset_tarea3_limpio.csv` — 3.925 registros horarios.
+**Resultado:** `data/silver/dataset_horario.csv` — 3.925 registros horarios.
 
-### Tareas 4-5 — Modelo lineal de temperatura de calefacción
+### 5.2 Inferencia de la temperatura de calefacción
 
 Ver [modelo-ml.md § Regresión lineal](modelo-ml.md#1-regresión-lineal-temperatura-de-calefacción).
 
-### Tarea 6 — Calefacción encendida
+### 5.3 Estado de la calefacción
 
 Añade la columna `calefaccion_encendida` (0/1) a partir de la temperatura inferida por el
 modelo lineal y del algoritmo de termostato
 (`scripts/estado_calefaccion.py::algoritmo_termostato_raw`).
 
-**Resultado:** `data/gold/dataset_tarea6.csv`
+**Resultado:** `data/gold/dataset_calefaccion.csv`
 
-### Tarea 7 — Derroche actual
+### 5.4 Derroche actual
 
 Calcula los **minutos ponderados** de apertura: la puerta cuenta como 2 ventanas inferiores,
 y cada ventana inferior como 2 superiores.
@@ -123,24 +123,24 @@ derroche_actual = 1  ⟺  calefaccion_encendida = 1
                    AND  minutos_ponderados_abiertos > 12   (20 % × 60 min)
 ```
 
-**Resultado:** `data/gold/dataset_tarea7.csv`
+**Resultado:** `data/gold/dataset_derroche.csv`
 
 ![Horas de derroche por semana a lo largo del dataset](img/serie_temporal_derroche.png)
 
-### Tarea 8 — Derroche en la hora siguiente
+### 5.5 Target: derroche en la hora siguiente
 
 Crea `derroche_siguiente_hora` desplazando `derroche_actual` una hora hacia adelante.
 Esta es la variable **target** del modelo de IA: dados los sensores de la hora actual,
 predecir si habrá derroche en la siguiente.
 
-**Resultado:** `data/gold/dataset_tarea8.csv`
+**Resultado:** `data/gold/dataset_target.csv`
 
-### Tarea 9 — Dataset final
+### 5.6 Poda de columnas
 
 Elimina las columnas intermedias (estado de puertas/ventanas, minutos abiertos, temperatura
 inferida de calefacción), que introducirían fuga de información y sobreajuste.
 
-**Resultado:** `data/gold/dataset_tarea9_final.csv`
+**Resultado:** `data/gold/dataset_entrenamiento.csv`
 
 ## 6. Dataset final
 

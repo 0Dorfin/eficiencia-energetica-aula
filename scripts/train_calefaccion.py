@@ -10,7 +10,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 _ROOT = Path(__file__).resolve().parent.parent
-CSV_PATH = _ROOT / "data" / "silver" / "dataset_tarea3_limpio.csv"
+CSV_PATH = _ROOT / "data" / "silver" / "dataset_horario.csv"
 OUT_PATH = _ROOT / "models" / "calefaccion_linear.joblib"
 
 _EXTRA_COLS = [

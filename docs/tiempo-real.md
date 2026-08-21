@@ -40,7 +40,7 @@ la red del centro, y sin contaminar el volcado histórico del puerto 5432.
 | `scripts/datos_simulados.py` | Genera lecturas sintéticas con deriva realista para los 17 dispositivos y las inserta en `ltss`. Reintenta la conexión hasta 30 veces al arrancar. |
 | `scripts/predict_derroche.py` | Cada `--interval` segundos lee `gold_features_horaria`, deriva features, invoca el modelo y hace `UPSERT` en `predicciones_derroche`. Al arrancar rellena las horas ya pasadas del día (`backfill_today`). |
 | `scripts/estado_calefaccion.py` | Algoritmo de termostato + inferencia de `calefaccion_encendida` a partir de `models/calefaccion_linear.joblib`. Compartido por notebooks y pipeline. |
-| `scripts/train_calefaccion.py` | Reentrena la regresión lineal de calefacción desde `data/silver/dataset_tarea3_limpio.csv`. |
+| `scripts/train_calefaccion.py` | Reentrena la regresión lineal de calefacción desde `data/silver/dataset_horario.csv`. |
 | `scripts/relleno_datos.py` | Utilidad puntual: rellena huecos temporales de `ltss` copiando el mismo periodo de N años atrás, desplazado. |
 
 Todos aceptan `--host`, `--port`, `--dbname`, `--user`, `--password`, con fallback a las

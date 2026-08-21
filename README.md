@@ -82,7 +82,7 @@ proyecto_domotica_3/
 │
 ├── notebooks/                        # Análisis y modelado
 │   ├── 01_eda.ipynb                  # Correlaciones entre sensores
-│   ├── 02_build_gold.ipynb           # Construcción del dataset (tareas 3-9)
+│   ├── 02_build_gold.ipynb           # Construcción del dataset gold
 │   ├── 03_model_ml.ipynb             # Regresión lineal
 │   ├── 04_model_nn.ipynb             # Red neuronal V1
 │   ├── 04b_model_nn_improved.ipynb   # Red neuronal V2 (final)
@@ -105,8 +105,8 @@ proyecto_domotica_3/
 │
 ├── data/                             # Arquitectura medallion en CSV
 │   ├── bronze/historico_calefaccion.csv
-│   ├── silver/dataset_tarea3_limpio.csv
-│   └── gold/dataset_tarea6..9_final.csv
+│   ├── silver/dataset_horario.csv
+│   └── gold/dataset_calefaccion..9_final.csv
 │
 ├── infra/                            # Orquestación
 │   ├── docker-compose.yml            # Stack histórico  (5432 / 3000)
@@ -254,4 +254,3 @@ Los scripts de `scripts/` leen además `PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER
 | [docs/app.md](docs/app.md) | App Streamlit: interfaz, pipeline de inferencia, ejecución |
 | [docs/grafana.md](docs/grafana.md) | Dashboards histórico y en directo, provisioning |
 | [docs/tiempo-real.md](docs/tiempo-real.md) | Simulador, servicio de inferencia continua, tabla de predicciones |
-| [docs/enunciado.md](docs/enunciado.md) | Enunciado original del proyecto |
