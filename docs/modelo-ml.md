@@ -14,7 +14,7 @@ una red neuronal que predice el derroche de la hora siguiente.
 
 ## 1. Regresión lineal: temperatura de calefacción
 
-Notebooks `notebooks/02_build_gold.ipynb` y `notebooks/03_model_ml.ipynb`.
+Notebooks `notebooks/02_dataset_gold.ipynb` y `notebooks/03_regresion_calefaccion.ipynb`.
 Entrenamiento reproducible: `scripts/train_calefaccion.py`.
 
 **Objetivo:** inferir la temperatura del sensor de calefacción a partir de las condiciones
@@ -52,7 +52,7 @@ termostato que decide `calefaccion_encendida`.
 
 ## 2. Red neuronal V1
 
-Notebook: `notebooks/04_model_nn.ipynb` — clase `RedDerroche` en `app/predictor.py`.
+Notebook: `notebooks/04_red_neuronal_v1.ipynb` — clase `RedDerroche` en `app/predictor.py`.
 
 ```
 Input (13 features)
@@ -70,7 +70,7 @@ Input (13 features)
 
 ## 3. Red neuronal V2 (modelo final)
 
-Notebook: `notebooks/04b_model_nn_improved.ipynb` — clase `RedDerrocheV2` en `app/predictor.py`.
+Notebook: `notebooks/05_red_neuronal_v2.ipynb` — clase `RedDerrocheV2` en `app/predictor.py`.
 
 | Aspecto | V1 | V2 |
 |---|---|---|
@@ -117,7 +117,7 @@ Mejor Val F1 **0.9706**, umbral óptimo **0.50**.
 
 ## 4. Métricas en test
 
-Reproducibles con `notebooks/05_evaluation.ipynb`, que carga los artefactos de `models/` con la
+Reproducibles con `notebooks/06_evaluacion.ipynb`, que carga los artefactos de `models/` con la
 misma clase que usan la app y el pipeline en tiempo real, y compara contra los valores de esta
 tabla. Si el `.pt` guardado y el código de inferencia se desincronizan, ese notebook falla.
 

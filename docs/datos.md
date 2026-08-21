@@ -89,7 +89,7 @@ los 4 sin pérdida significativa de información.
 
 ## 5. Construcción del dataset
 
-Notebook: `notebooks/02_build_gold.ipynb`
+Notebook: `notebooks/02_dataset_gold.ipynb`
 
 ### 5.1 Agregación horaria y enriquecimiento
 

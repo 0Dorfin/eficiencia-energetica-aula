@@ -268,7 +268,7 @@ with col_resultado:
         except FileNotFoundError:
             st.error(
                 f"Faltan archivos del modelo o del escalador. Ejecuta la última celda de "
-                f"`04b_model_nn_improved.ipynb` para generar `{modelo_pt.name}` y `{escala_jb.name}`."
+                f"`notebooks/05_red_neuronal_v2.ipynb` para generar `{modelo_pt.name}` y `{escala_jb.name}`."
             )
         except Exception as e:
             st.error(f"No se pudo completar la predicción: {e}")

@@ -82,12 +82,11 @@ proyecto_domotica_3/
 │
 ├── notebooks/                        # Análisis y modelado
 │   ├── 01_eda.ipynb                  # Correlaciones entre sensores
-│   ├── 02_build_gold.ipynb           # Construcción del dataset gold
-│   ├── 03_model_ml.ipynb             # Regresión lineal
-│   ├── 04_model_nn.ipynb             # Red neuronal V1
-│   ├── 04b_model_nn_improved.ipynb   # Red neuronal V2 (final)
-│   └── 05_evaluation.ipynb           # Verifica que models/ reproduce las métricas
-│
+│   ├── 02_dataset_gold.ipynb         # Construcción del dataset y del target
+│   ├── 03_regresion_calefaccion.ipynb # Modelo lineal de temperatura de calefacción
+│   ├── 04_red_neuronal_v1.ipynb      # Red neuronal V1 (13 features)
+│   ├── 05_red_neuronal_v2.ipynb      # Red neuronal V2 — modelo final (31 features)
+│   └── 06_evaluacion.ipynb           # Verifica que models/ reproduce las métricas
 ├── sql/                              # Vistas de la arquitectura medallion
 │   ├── 01_bronze_extract.sql
 │   ├── 02_silver_clean.sql
