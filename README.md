@@ -2,7 +2,7 @@
 
 Sistema de detección y predicción de **derroche energético** en un aula con instrumentación IoT.
 Una red neuronal predice, a partir de las lecturas de la hora actual, si en la hora siguiente
-habrá calefacción encendida con puertas o ventanas abiertas (**F1 = 0.84**, **ROC-AUC = 0.97**).
+habrá calefacción encendida con puertas o ventanas abiertas.
 
 ## Índice
 
